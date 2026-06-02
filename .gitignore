@@ -1,0 +1,5 @@
+# I binari NON vanno in git: sono enormi e si distribuiscono come asset di
+# GitHub Releases (publish-releases.ps1). In git solo tooling + docs.
+/bin/
+/apps/
+/.dist/
