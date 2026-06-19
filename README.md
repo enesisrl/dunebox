@@ -54,7 +54,7 @@ Schedule jobs with a **guided editor** (no crontab syntax to memorise) — `php 
 Turn on the built-in wildcard DNS and `*.test` resolves to your machine automatically — **no entries in the Windows hosts file**. Off by default; classic hosts-file mode otherwise.
 
 ### 🧰 The toolbox, one click away
-Dunebox installs, updates and removes the dev tools you want — **Git, Node.js, nvm, Python and FFmpeg** (from their official sources) — and notifies you when a new version is out. Together with the bundled Composer, they're available as commands in any terminal.
+Dunebox installs, updates and removes the dev tools you want — **Git, Node.js, nvm, Python (2 and 3, side by side) and FFmpeg** (from their official sources) — and notifies you when a new version is out. Together with the bundled Composer, they're available as commands in any terminal (`python` and `python3` included).
 
 ### 🔔 Everything in one place
 A graphical dashboard: service status at a glance, host and Cron Jobs management, quick access to tools, logs one click away. All alerts and prompts are collected in a single **Notifications** center. It lives in the system tray: close the window and the services keep running.
@@ -118,7 +118,7 @@ Reachable over both HTTP and HTTPS (green padlock, same trusted certificate):
 
 ## 📦 What's inside
 
-Apache (or nginx) · PHP 5.6 / 7.4 / 8.2 / 8.3 / 8.5 · MySQL — with PostgreSQL and MongoDB optional · Redis · Mailpit · phpMyAdmin · phpRedisAdmin · a bundled Composer — all open source or freeware. Git, Node.js, nvm, Python and FFmpeg can be added (and removed) with one click from the wizard or the Settings.
+Apache (or nginx) · PHP 5.6 / 7.4 / 8.2 / 8.3 / 8.5 · MySQL — with PostgreSQL and MongoDB optional · Redis · Mailpit · phpMyAdmin · phpRedisAdmin · a bundled Composer — all open source or freeware. Git, Node.js, nvm, Python (2 and 3) and FFmpeg can be added (and removed) with one click from the wizard or the Settings.
 
 ---
 
