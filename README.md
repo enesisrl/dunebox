@@ -1,166 +1,148 @@
 <p align="center">
-  <img src="dunebox-icon.svg" alt="Dunebox" width="120" height="120">
+  <img src="dunebox-icon.svg" alt="" width="110" height="110">
 </p>
-
-<h1 align="center">Dunebox</h1>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="dunebox-wordmark.svg">
+    <img src="dunebox-wordmark-dark.svg" alt="Dunebox" height="42">
+  </picture>
+</p>
 
 <p align="center"><strong>The complete PHP development environment for Windows. In a single folder.</strong></p>
 
-Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch Dunebox downloads and configures everything by itself: web server, PHP (in five versions at once), databases, mail, tools. No installer, no system service, nothing in the Windows registry. When you close Dunebox, your PC is exactly as it was.
+Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch a short wizard lets you choose what to install, then Dunebox downloads and configures everything by itself: web server, PHP (up to five versions at once), databases, mail, tools. No installer, no system service, nothing left in the Windows registry. When you remove it, just delete the folder.
 
-Open source (MIT), built for **Laravel and PHP** developers on Windows.
+**Freeware** — free to use, built for **Laravel and PHP** developers on Windows.
 
 ---
 
-## ✨ Highlights
+## ✨ What you get
 
 - **Every PHP version at once** — 5.6 · 7.4 · 8.2 · 8.3 · 8.5, side by side, no switching
-- **Many databases, even the same engine in several versions** — MySQL 9.6 + 8.0 + 5.7 + MariaDB together, each on its own port
-- **A local domain + green HTTPS for every project** — `mysite.test` in seconds, trusted certificate
-- **A smart terminal** — `php`/`artisan`/`composer` auto-pick the project's PHP version
-- **Built-in tools** — phpMyAdmin, phpRedisAdmin, Mailpit, Cron Jobs, optional local DNS
+- **Many databases, even the same engine in several versions** — MySQL 9.6 + 8.0 + 5.7 + MariaDB together, each on its own port; PostgreSQL, MongoDB, Redis optional
+- **A local domain + green HTTPS for every project** — `mysite.test` in seconds, trusted certificate, Apache or nginx per site
+- **A smart terminal** — `php`/`artisan`/`composer` automatically use the project's PHP version
+- **Built-in web tools** — phpMyAdmin (manages all MySQL/MariaDB instances), phpRedisAdmin, Mailpit
+- **Cron Jobs**, **optional local DNS**, **dev tools** (Git/Node/nvm/Python/FFmpeg via their official channels), bundled **Composer**
 - **Claude integration** — drive Dunebox from Claude Code / Claude Desktop
 - **Truly portable** — one folder; move it, copy it, carry it on a USB stick
 
 ---
 
-## 📚 Feature guide
+## 📥 Installation
 
-### 🐘 Every PHP version, together
-PHP **5.6, 7.4, 8.2, 8.3 and 8.5** run side by side, always. The legacy project stays on 5.6, the new one runs on 8.5 — at the same time, no switching, no restarts. Each site picks its version with one click. Every modern version ships with the extensions real projects need already on — **Imagick** and **GD** for images, the **MongoDB** driver, **intl**, **OPcache**, **mbstring**, **cURL**, and **PDO** for MySQL, PostgreSQL and SQLite.
+1. Download the latest release zip (**`dunebox-vX.Y.Z.zip`**) from the [Releases](../../releases) page.
+2. **Extract it** — we recommend **`C:\dunebox`** (you can use any folder, another drive, or a USB stick). That folder becomes Dunebox's home (the "root").
+3. Open **`dunebox.exe`**.
+4. Follow the **setup wizard**: language → general defaults (PHP/web engine, ports, autostart, terminal integration) → packages → dev tools → paths (where to keep data/config/logs) → Claude integration → DNS → logs.
+5. Dunebox downloads the selected packages and configures everything. You'll get **one Windows confirmation (UAC)** to add the hosts entries and trust the local certificate.
 
-### 🗄️ Databases — multiple engines *and* multiple versions, together
-This is where Dunebox goes further than the usual stack. You're not limited to one database: you can run **several engines at the same time**, and even **several versions of the same engine side by side**, each listening on its own port.
+Requirements: Windows 10/11 (64-bit), an internet connection on first launch (to download packages), ~2–3 GB of disk for a typical install.
 
-- **MySQL 9.6, 8.0 and 5.7 at the same time** — keep a legacy project on 5.7 while a new one runs on 9.6, with no conflicts
-- **MariaDB** alongside MySQL
-- **PostgreSQL** and **MongoDB** one toggle away
-- **Redis** for cache and queues
+## 🗑️ Uninstallation
 
-Each instance shows up with its **name and version** (e.g. *MySQL 9.6*, *MariaDB 12.3*) and gets its **own port, data directory and configuration** — your data is isolated per version and survives updates and reinstalls, in a folder you choose. Ports are editable from Settings: each engine on the port you prefer.
+Dunebox doesn't install a service or write to the registry, so removal is mostly "delete the folder":
 
-| Engine | Default port |
-|---|---|
-| MySQL 9.6 | `3306` |
-| MySQL 8.0 | `3307` |
-| MySQL 5.7 | `3308` |
-| MariaDB | `3309` |
-| PostgreSQL | `5432` |
-| MongoDB | `27017` |
-
-**Ready-to-use credentials**, created automatically on first launch — user **`dunebox`** (or the engine's root) with password **`secret`**:
-
-| Database | Host | User | Password |
-|---|---|---|---|
-| MySQL / MariaDB | `127.0.0.1` (port per instance) | `dunebox` (or `root`) | `secret` |
-| PostgreSQL | `127.0.0.1:5432` | `dunebox` (or `postgres`) | `secret` |
-
-Point your app's `.env` at `127.0.0.1`, the right port, user `dunebox`, password `secret` — connected. The same panel in Settings lists every active database with its connection details and a ready-made `.env` snippet for email.
-
-### 🧭 phpMyAdmin manages *all* your databases
-[phpMyAdmin](http://phpmyadmin.localhost) is wired to **every MySQL and MariaDB instance at once**: pick the server (MySQL 9.6, 8.0, 5.7, MariaDB…) from the dropdown and manage them all from one place. **Redis** has [phpRedisAdmin](http://phpredisadmin.localhost). All reachable from the browser, over HTTP and HTTPS.
-
-### 🌐 A local domain for every project
-`mysite.test` in seconds: choose a name, a folder and a PHP version — Dunebox generates the virtual host, updates the Windows hosts file and the certificate. Aliases and multiple domains included. Prefer Apache or nginx? Pick the engine per site.
-
-### 🔒 Green HTTPS, even locally
-A local certificate authority, generated and **trusted automatically** — once. Every `.test` site runs over HTTPS with the green padlock and no browser warnings, in **Chrome, Edge, Brave, Opera and Firefox**. New sites are trusted instantly; if the certificate ever isn't trusted, Dunebox notices and offers to fix it in one click.
-
-### ⌨️ A smart terminal
-Type `dunebox` once and your terminal is ready (correct PATH and tools, in both cmd and PowerShell). From then on `php`, `artisan` and `composer` **automatically use the right PHP version for the project you're in** — no manual switching. Run `composer install` in a legacy project and it uses that project's PHP; in a modern one, the modern PHP. The matching `php.ini` (with the right extensions) is loaded for you.
-
-### 🎼 Composer, included and portable
-Composer comes **with Dunebox**, inside the folder — nothing scattered across your PC. It always runs with the correct PHP and extensions for your project (openssl, mbstring, …), and travels with the environment when you move it.
-
-### 📬 Emails don't leave: you see them
-Every email sent from PHP lands in a **local inbox** ([Mailpit](http://mailpit.localhost)) with HTML preview, source and live updates. Zero configuration, zero test emails accidentally sent to real clients. A copy-ready `.env` SMTP snippet is in Settings.
-
-### ⏰ Cron Jobs, built in
-Schedule jobs with a **guided editor** (no crontab syntax to memorise) — `php artisan schedule:run`, backups, anything — and Dunebox runs them with the project's correct PHP version. Per-project jobs live in the project (project mode) and travel with it in git: your teammates inherit them. System-wide jobs go in the global scheduler. Everything runs only while Dunebox is on.
-
-```json
-"cron": [
-  "* * * * *  php artisan schedule:run",
-  "0 3 * * *  php artisan backup:run"
-]
-```
-
-### 🤖 Claude integration
-Dunebox integrates with **Claude Code** and **Claude Desktop**: enable it from the wizard or Settings and Claude can drive your environment — list and create hosts, manage Cron Jobs, check service status, read logs, set a site's PHP version, and run `artisan`/`composer` with the right PHP. A bundled skill teaches Claude the Dunebox workflow, and an MCP server exposes the operations as structured tools.
-
-### 🌍 Optional local DNS
-Turn on the built-in wildcard DNS and `*.test` resolves to your machine automatically — **no entries in the Windows hosts file**. Off by default; classic hosts-file mode otherwise.
-
-### 🧰 The toolbox, one click away
-Dunebox installs, updates and removes the dev tools you want — **Git, Node.js, nvm, Python (2 and 3, side by side) and FFmpeg** (from their official sources) — and notifies you when a new version is out. Together with the bundled Composer, they're available as commands in any terminal (`python` and `python3` included).
-
-### 📦 Install only what you need
-Every component is a package you toggle on or off individually, in its own card in Settings — enable/disable, install/uninstall, size on disk, and (for databases) the listening port, all in one place. Dependencies resolve themselves (no web server → no PHP). Want a PHP or database version that isn't on the list? Add it with one line of configuration — no need to wait for an update.
-
-### 🔔 Everything in one place
-A graphical dashboard: service status at a glance, host and Cron Jobs management, quick access to tools, logs one click away. All alerts and prompts are collected in a single **Notifications** center. It lives in the system tray: close the window and the services keep running — and Dunebox shuts everything down cleanly when Windows restarts.
-
-### ✋ Your changes are respected
-Hand-tweaked `php.ini` or `httpd.conf`? Dunebox **won't overwrite them**: updates and installs only touch what's missing. A full regeneration happens only when you ask for it.
-
-### 🎒 Truly portable
-Everything — software, configuration, Composer, projects, databases — lives in one folder. Copy it to another drive, carry it on a USB stick, move it to another PC: Dunebox detects the move and realigns itself. Perfect for keeping a whole team on the same stack.
+1. **Quit Dunebox** from the tray (right-click the tray icon → *Esci/Quit*) so all services stop.
+2. **Delete the Dunebox folder** (e.g. `C:\dunebox`). Your databases live in the data folder you chose — delete it too if you don't need the data.
+3. Optional cleanup of the system touches Dunebox made (only if you want a spotless system):
+   - **hosts file**: remove the `*.test` lines added for your sites in `C:\Windows\System32\drivers\etc\hosts`.
+   - **certificate**: open *certmgr.msc* → *Trusted Root Certification Authorities* → *Certificates* and remove **Dunebox Local CA**.
+   - **PATH / autostart**: if you enabled "terminal integration" or "start with Windows", remove the Dunebox `system\bin` entry from your user PATH and the `Dunebox` entry from *Startup apps*.
 
 ---
 
-## 🚀 Get going in three steps
+## 🚀 Usage
 
-1. **Download** the zip from the latest release and **extract** it wherever you like (that folder becomes your home)
-2. **Open `dunebox.exe`** — a short setup wizard (language first, then packages, PHP versions and folders) downloads and configures everything
-3. **Create your first host**: name, folder, PHP version → `https://mysite.test` is online
+### Start and stop
+Open `dunebox.exe`: services start automatically. The window lives in the **system tray** — closing it keeps services running; quit from the tray to stop everything. The dashboard shows the status of each service, with quick links to logs and web tools.
 
-## ⌨️ From the terminal too
+From a terminal you can do the same: type `dunebox` once to prepare the session, then `dunebox up` / `dunebox down`.
 
-Everything the dashboard does, you can do from the command line — handy for automation and for those who live in the terminal. Type `dunebox` to prepare the session, then:
+### Hosts (local sites)
+Add a site from the **Host** tab: hostname (e.g. `mysite.test`), document root (any folder), PHP version, optional aliases, HTTPS on/off, Apache or nginx. Dunebox generates the virtual host, updates the Windows hosts file and the certificate's SAN list (one UAC prompt). New projects found in your scanned folders are proposed automatically.
+
+CLI equivalent: `dunebox host add mysite.test --docroot C:\work\mysite\public --php 8.3 --ssl` · `dunebox host list` · `dunebox host remove mysite.test`.
+
+### Multiple PHP versions
+PHP 5.6 / 7.4 / 8.2 / 8.3 / 8.5 run together as FastCGI workers; Apache routes each request to the version chosen per host. Modern versions ship with the extensions real projects need (Imagick, GD, MongoDB driver, intl, OPcache, mbstring, cURL, PDO for MySQL/PostgreSQL/SQLite). In the terminal, `php`, `artisan` and `composer` pick the version of the project you're in — no manual switching.
+
+### Databases — multiple engines and versions together
+Run several database engines at once, and even several versions of the same engine, each on its own port and with its own data directory:
+
+| Engine | Default port | Users (password `secret`) |
+|---|---|---|
+| MySQL 9.6 / 8.0 / 5.7 | `3306` / `3307` / `3308` | `dunebox`, `root` |
+| MariaDB | `3309` | `dunebox`, `root` |
+| PostgreSQL | `5432` | `dunebox`, `postgres` |
+| MongoDB | `27017` | — |
+| Redis | `6379` | — |
+
+Enable the ones you want from **Settings → Packages** and set each engine's **port** there. Connect from your app's `.env` with host `127.0.0.1`, the right port, user `dunebox`, password `secret`. Every package's box has an **ℹ Info** button showing its exact connection details. Credentials are created automatically on first init; data lives in a folder you choose and survives updates.
+
+### Web tools (in the browser)
+Reachable over HTTP and HTTPS (green padlock, trusted cert):
+
+| Tool | URL |
+|---|---|
+| phpMyAdmin — manages **all** MySQL/MariaDB instances (pick the server from the dropdown) | `http://phpmyadmin.localhost` |
+| phpRedisAdmin | `http://phpredisadmin.localhost` |
+| Mailpit — every email sent from PHP lands here | `http://mailpit.localhost` |
+
+**Email**: PHP is preconfigured to deliver to Mailpit. For direct SMTP from Laravel use `MAIL_HOST=127.0.0.1`, `MAIL_PORT=1025`, no username/password (the Mailpit package's Info button has a copy-ready `.env`).
+
+### Cron Jobs
+Schedule jobs from the **Cron Jobs** tab with a guided editor (no crontab syntax needed). **Global** jobs live in the instance; **per-project** jobs live in the project (`.dunebox`) and travel with it in git, so teammates inherit them. Each job runs with the project's PHP version; they run only while Dunebox is on. CLI: `dunebox cron list`.
+
+### Terminal integration & Composer
+Enable "terminal integration" (Settings → General) and the `dunebox` command becomes available in cmd and PowerShell. Composer is bundled inside Dunebox and always runs with the correct PHP/extensions for your project.
+
+### Dev tools
+From **Settings → Development tools** install/update/remove Git, Node.js, nvm, Python (2 and 3) and FFmpeg from their official channels (winget); Composer is managed by Dunebox. Update badges appear when a new version is out.
+
+### Local DNS (optional)
+Turn on the built-in wildcard DNS (Settings/DNS) and `*.test` resolves to your machine automatically — no hosts-file entries. Off by default.
+
+### Claude integration
+From the wizard or **Settings → Claude integration**, enable the integration with **Claude Code** / **Claude Desktop**: Claude can list/create hosts, manage Cron Jobs, check service status, read logs and run `artisan`/`composer` with the right PHP, via a bundled skill and an MCP server.
+
+### Notifications
+Transient results appear as **toasts** (green = success, red = error). Anything that needs your action (pending hosts/cert sync, malformed project config, available tool updates, untrusted certificate) is collected in the **Notifications** center with a one-click link to fix it.
+
+### Portability
+Everything — software, config, Composer, databases — is in one folder. Move or copy it and Dunebox detects the change and realigns paths, PATH and autostart on next launch.
+
+---
+
+## ⌨️ CLI reference
+
+Type `dunebox` to prepare the session, then:
 
 | Command | What it does |
 |---|---|
 | `dunebox up` / `down` | start / stop all services |
-| `dunebox host add mysite.test ...` | create a new host (vhost + hosts + certificate) |
-| `dunebox host list` | list configured hosts |
-| `dunebox package list` | show components and their status |
-| `dunebox package enable / disable <name>` | turn a component on/off |
-| `dunebox cron list` | show scheduled Cron Jobs |
+| `dunebox host add\|list\|remove …` | manage hosts (vhost + hosts file + certificate) |
+| `dunebox package list\|enable\|disable\|install …` | manage components |
+| `dunebox cron list` | list scheduled Cron Jobs |
 | `dunebox env` | environment status (root, default PHP, tools) |
+| `php` · `artisan` · `composer` | use the current project's PHP version automatically |
 
-And `php`, `artisan` and `composer` **automatically use the PHP version of the project you're in**.
-
-## ✅ Compatibility & requirements
+## ✅ Compatibility
 
 | | |
 |---|---|
-| **Operating system** | Windows 10 and Windows 11 (64-bit) |
-| **PHP** | 5.6 · 7.4 · 8.2 · 8.3 · 8.5 — all active at once |
-| **Databases** | MySQL (9.6 / 8.0 / 5.7), MariaDB, PostgreSQL, MongoDB, Redis — multiple at once |
+| **OS** | Windows 10 / 11 (64-bit) |
+| **PHP** | 5.6 · 7.4 · 8.2 · 8.3 · 8.5 (all active at once) |
+| **Databases** | MySQL 9.6/8.0/5.7 · MariaDB · PostgreSQL · MongoDB · Redis (multiple at once) |
 | **Frameworks** | Laravel (all versions, legacy included) and any PHP project |
-| **Disk space** | ~2–3 GB for a typical install (only the active components) |
-| **Connection** | needed only on first launch, to download the packages |
-| **Permissions** | a single Windows confirmation for hosts and certificate; no service installed |
-| **Browser** | Edge and Chrome resolve `.localhost` on their own; Dunebox handles the `.test` domains |
-
-Nothing to uninstall: to remove Dunebox, just delete the folder.
-
-## 🔗 Tools in your browser
-
-Reachable over both HTTP and HTTPS (green padlock, same trusted certificate):
-
-| Tool | URL |
-|---|---|
-| phpMyAdmin (all MySQL/MariaDB instances) | `http://phpmyadmin.localhost` · `https://…` |
-| phpRedisAdmin | `http://phpredisadmin.localhost` · `https://…` |
-| Mailpit | `http://mailpit.localhost` · `https://…` |
-
-## 📦 What's inside
-
-Apache (or nginx) · PHP 5.6 / 7.4 / 8.2 / 8.3 / 8.5 · MySQL (9.6 / 8.0 / 5.7) · MariaDB · PostgreSQL and MongoDB (optional) · Redis · Mailpit · phpMyAdmin · phpRedisAdmin · a bundled Composer — all open source or freeware. Git, Node.js, nvm, Python (2 and 3) and FFmpeg can be added (and removed) with one click from the wizard or the Settings.
+| **Permissions** | one UAC confirmation for hosts + certificate; no service installed |
 
 ---
 
+## ⭐ Like it?
+
+If Dunebox is useful to you, leave a **★ Star** and click **👁 Watch** at the top of this page to follow new releases. It helps a lot.
+
 ## License
 
-Dunebox is **open source** under the [MIT](LICENSE) license.
+Dunebox is **freeware**: free to use under its [End User License Agreement](LICENSE). The third-party components it installs keep their own (open source / freeware) licenses.
