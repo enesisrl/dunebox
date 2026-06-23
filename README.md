@@ -12,6 +12,12 @@
 
 Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch a short wizard lets you choose what to install, then Dunebox downloads and configures everything by itself: web server, PHP (up to five versions at once), databases, mail, tools. No installer, no system service, nothing left in the Windows registry. When you remove it, just delete the folder.
 
+<p align="center">
+  <picture>
+    <img src="Screenshot.png" alt="Dunebox">
+  </picture>
+</p>
+
 **Freeware** — free to use, built for **Laravel and PHP** developers on Windows.
 
 ---
