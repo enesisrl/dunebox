@@ -78,7 +78,26 @@ Run several database engines at once, and even several versions of the same engi
 | MongoDB | `27017` | — |
 | Redis | `6379` | — |
 
-Enable the ones you want from **Settings → Packages** and set each engine's **port** there. Connect from your app's `.env` with host `127.0.0.1`, the right port, user `dunebox`, password `secret`. Every package's box has an **ℹ Info** button showing its exact connection details. Credentials are created automatically on first init; data lives in a folder you choose and survives updates.
+Enable the ones you want from **Settings → Packages** and set each engine's **port** there (each ℹ Info button shows the live connection details). Ports are editable; the values above are the defaults.
+
+**Default credentials** (created automatically on first init, host `127.0.0.1`):
+
+- **User `dunebox`** — password **`secret`** (full privileges) — recommended for your apps.
+- Also **`root`** (MySQL/MariaDB) / **`postgres`** (PostgreSQL) — password **`secret`**.
+- MongoDB and Redis run without authentication (local only).
+
+Example Laravel `.env` for MySQL 9.6:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306        # 3307 for MySQL 8.0, 3308 for 5.7, 3309 for MariaDB
+DB_DATABASE=your_db
+DB_USERNAME=dunebox
+DB_PASSWORD=secret
+```
+
+Your data lives in the data folder you chose and survives updates and reinstalls.
 
 ### Web tools (in the browser)
 Reachable over HTTP and HTTPS (green padlock, trusted cert):
@@ -89,7 +108,22 @@ Reachable over HTTP and HTTPS (green padlock, trusted cert):
 | phpRedisAdmin | `http://phpredisadmin.localhost` |
 | Mailpit — every email sent from PHP lands here | `http://mailpit.localhost` |
 
-**Email**: PHP is preconfigured to deliver to Mailpit. For direct SMTP from Laravel use `MAIL_HOST=127.0.0.1`, `MAIL_PORT=1025`, no username/password (the Mailpit package's Info button has a copy-ready `.env`).
+**Email (Mailpit)**: every email sent from PHP is captured by Mailpit — nothing leaves your machine. PHP's `sendmail` is already wired to it, so `mail()` and frameworks "just work". Connection details:
+
+- **Web UI**: `http://mailpit.localhost` (or `http://localhost:8025`)
+- **SMTP**: host `127.0.0.1`, port `1025`, **no username/password, no encryption**
+
+Example Laravel `.env` for SMTP:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=127.0.0.1
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.test"
+```
 
 ### Cron Jobs
 Schedule jobs from the **Cron Jobs** tab with a guided editor (no crontab syntax needed). **Global** jobs live in the instance; **per-project** jobs live in the project (`.dunebox`) and travel with it in git, so teammates inherit them. Each job runs with the project's PHP version; they run only while Dunebox is on. CLI: `dunebox cron list`.
