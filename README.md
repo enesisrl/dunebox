@@ -55,6 +55,7 @@ The full guide lives at **[dunebox.enesi.it/docs.html](https://dunebox.enesi.it/
 
 ## ✅ Compatibility
 
+|---|---|
 | **OS** | Windows 10 / 11 (64-bit) |
 | **PHP** | 5.6 · 7.4 · 8.2 · 8.3 · 8.5 (all active at once) |
 | **Databases** | MySQL 9.6/8.0/5.7 · MariaDB · PostgreSQL · MongoDB · Redis (multiple at once) |
