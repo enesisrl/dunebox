@@ -10,7 +10,7 @@
 
 <p align="center"><strong>The complete PHP development environment for Windows.</strong></p>
 
-Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch a short wizard lets you choose what to install, then Dunebox downloads and configures everything by itself: web server, PHP (up to five versions at once), databases, mail, tools. No installer, no system service, nothing left in the Windows registry. When you remove it, just delete the folder.
+Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch a short wizard lets you choose what to install, then Dunebox downloads and configures everything by itself: web server, PHP (up to five versions at once), databases, mail, tools. No installer, no Windows service — when you remove it, just delete the folder.
 
 <p align="center">
   <picture>
@@ -18,7 +18,13 @@ Download a zip, extract it wherever you want, open `dunebox.exe`. On first launc
   </picture>
 </p>
 
-**Freeware** — free to use, built for **Laravel and PHP** developers on Windows.
+<p align="center"><strong>Freeware</strong> — free to use, built for <strong>Laravel and PHP</strong> developers on Windows.</p>
+
+<p align="center">
+  <a href="../../releases/latest"><strong>⬇ Download</strong></a> ·
+  <a href="https://dunebox.enesi.it/docs.html"><strong>📖 Documentation</strong></a> ·
+  <a href="https://dunebox.enesi.it"><strong>🌐 Website</strong></a>
+</p>
 
 ---
 
@@ -35,137 +41,17 @@ Download a zip, extract it wherever you want, open `dunebox.exe`. On first launc
 
 ---
 
-## 📥 Installation
+## 📥 Get started
 
-1. Download the latest release zip (**`dunebox-vX.Y.Z.zip`**) from the [Releases](../../releases) page.
-2. **Extract it** — we recommend **`C:\dunebox`** (you can use any folder, another drive, or a USB stick). That folder becomes Dunebox's home (the "root").
-3. Open **`dunebox.exe`**.
-4. Follow the **setup wizard**: language → general defaults (PHP/web engine, ports, autostart, terminal integration) → packages → dev tools → paths (where to keep data/config/logs) → Claude integration → DNS → logs.
-5. Dunebox downloads the selected packages and configures everything. You'll get **one Windows confirmation (UAC)** to add the hosts entries and trust the local certificate.
+1. Download the latest release zip (**`dunebox-vX.Y.Z.zip`**) from the [Releases](../../releases/latest) page.
+2. **Extract it** — we recommend **`C:\dunebox`** (any folder, another drive, or a USB stick works). That folder becomes Dunebox's home.
+3. Open **`dunebox.exe`** and follow the short setup wizard. Dunebox downloads the selected packages and configures everything, with **one Windows confirmation (UAC)** to add the host entries and trust the local certificate.
 
 Requirements: Windows 10/11 (64-bit), an internet connection on first launch (to download packages), ~2–3 GB of disk for a typical install.
 
-## 🗑️ Uninstallation
+## 📖 Documentation
 
-Dunebox doesn't install a service or write to the registry, so removal is mostly "delete the folder":
-
-1. **Quit Dunebox** from the tray (right-click the tray icon → *Esci/Quit*) so all services stop.
-2. **Delete the Dunebox folder** (e.g. `C:\dunebox`). Your databases live in the data folder you chose — delete it too if you don't need the data.
-3. Optional cleanup of the system touches Dunebox made (only if you want a spotless system):
-   - **hosts file**: remove the `*.test` lines added for your sites in `C:\Windows\System32\drivers\etc\hosts`.
-   - **certificate**: open *certmgr.msc* → *Trusted Root Certification Authorities* → *Certificates* and remove **Dunebox Local CA**.
-   - **PATH / autostart**: if you enabled "terminal integration" or "start with Windows", remove the Dunebox `system\bin` entry from your user PATH and the `Dunebox` entry from *Startup apps*.
-
----
-
-## 🚀 Usage
-
-### Start and stop
-Open `dunebox.exe`: services start automatically. The window lives in the **system tray** — closing it keeps services running; quit from the tray to stop everything. The dashboard shows the status of each service, with quick links to logs and web tools.
-
-From a terminal you can do the same: type `dunebox` once to prepare the session, then `dunebox up` / `dunebox down`.
-
-### Hosts (local sites)
-Add a site from the **Host** tab: hostname (e.g. `mysite.test`), document root (any folder), PHP version, optional aliases, HTTPS on/off, Apache or nginx. Dunebox generates the virtual host, updates the Windows hosts file and the certificate's SAN list (one UAC prompt). New projects found in your scanned folders are proposed automatically.
-
-CLI equivalent: `dunebox host add mysite.test --docroot C:\work\mysite\public --php 8.3 --ssl` · `dunebox host list` · `dunebox host remove mysite.test`.
-
-### Multiple PHP versions
-PHP 5.6 / 7.4 / 8.2 / 8.3 / 8.5 run together as FastCGI workers; Apache routes each request to the version chosen per host. Modern versions ship with the extensions real projects need (Imagick, GD, MongoDB driver, intl, OPcache, mbstring, cURL, PDO for MySQL/PostgreSQL/SQLite). In the terminal, `php`, `artisan` and `composer` pick the version of the project you're in — no manual switching.
-
-### Databases — multiple engines and versions together
-Run several database engines at once, and even several versions of the same engine, each on its own port and with its own data directory:
-
-| Engine | Default port | Users (password `secret`) |
-|---|---|---|
-| MySQL 9.6 / 8.0 / 5.7 | `3306` / `3307` / `3308` | `dunebox`, `root` |
-| MariaDB | `3309` | `dunebox`, `root` |
-| PostgreSQL | `5432` | `dunebox`, `postgres` |
-| MongoDB | `27017` | — |
-| Redis | `6379` | — |
-
-Enable the ones you want from **Settings → Packages** and set each engine's **port** there (each ℹ Info button shows the live connection details). Ports are editable; the values above are the defaults.
-
-**Default credentials** (created automatically on first init, host `127.0.0.1`):
-
-- **User `dunebox`** — password **`secret`** (full privileges) — recommended for your apps.
-- Also **`root`** (MySQL/MariaDB) / **`postgres`** (PostgreSQL) — password **`secret`**.
-- MongoDB and Redis run without authentication (local only).
-
-Example Laravel `.env` for MySQL 9.6:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306        # 3307 for MySQL 8.0, 3308 for 5.7, 3309 for MariaDB
-DB_DATABASE=your_db
-DB_USERNAME=dunebox
-DB_PASSWORD=secret
-```
-
-Your data lives in the data folder you chose and survives updates and reinstalls.
-
-### Web tools (in the browser)
-Reachable over HTTP and HTTPS (green padlock, trusted cert):
-
-| Tool | URL |
-|---|---|
-| phpMyAdmin — manages **all** MySQL/MariaDB instances (pick the server from the dropdown) | `http://phpmyadmin.localhost` |
-| phpRedisAdmin | `http://phpredisadmin.localhost` |
-| Mailpit — every email sent from PHP lands here | `http://mailpit.localhost` |
-
-**Email (Mailpit)**: every email sent from PHP is captured by Mailpit — nothing leaves your machine. PHP's `sendmail` is already wired to it, so `mail()` and frameworks "just work". Connection details:
-
-- **Web UI**: `http://mailpit.localhost` (or `http://localhost:8025`)
-- **SMTP**: host `127.0.0.1`, port `1025`, **no username/password, no encryption**
-
-Example Laravel `.env` for SMTP:
-
-```env
-MAIL_MAILER=smtp
-MAIL_HOST=127.0.0.1
-MAIL_PORT=1025
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="hello@example.test"
-```
-
-### Cron Jobs
-Schedule jobs from the **Cron Jobs** tab with a guided editor (no crontab syntax needed). **Global** jobs live in the instance; **per-project** jobs live in the project (`.dunebox`) and travel with it in git, so teammates inherit them. Each job runs with the project's PHP version; they run only while Dunebox is on. CLI: `dunebox cron list`.
-
-### Terminal integration & Composer
-Enable "terminal integration" (Settings → General) and the `dunebox` command becomes available in cmd and PowerShell. Composer is bundled inside Dunebox and always runs with the correct PHP/extensions for your project.
-
-### Dev tools
-From **Settings → Development tools** install/update/remove Git, Node.js, nvm, Python (2 and 3) and FFmpeg from their official channels (winget); Composer is managed by Dunebox. Update badges appear when a new version is out.
-
-### Local DNS (optional)
-Turn on the built-in wildcard DNS (Settings/DNS) and `*.test` resolves to your machine automatically — no hosts-file entries. Off by default.
-
-### Claude integration
-From the wizard or **Settings → Claude integration**, enable the integration with **Claude Code** / **Claude Desktop**: Claude can list/create hosts, manage Cron Jobs, check service status, read logs and run `artisan`/`composer` with the right PHP, via a bundled skill and an MCP server.
-
-### Notifications
-Transient results appear as **toasts** (green = success, red = error). Anything that needs your action (pending hosts/cert sync, malformed project config, available tool updates, untrusted certificate) is collected in the **Notifications** center with a one-click link to fix it.
-
-### Portability
-Everything — software, config, Composer, databases — is in one folder. Move or copy it and Dunebox detects the change and realigns paths, PATH and autostart on next launch.
-
----
-
-## ⌨️ CLI reference
-
-Type `dunebox` to prepare the session, then:
-
-| Command | What it does |
-|---|---|
-| `dunebox up` / `down` | start / stop all services |
-| `dunebox host add\|list\|remove …` | manage hosts (vhost + hosts file + certificate) |
-| `dunebox package list\|enable\|disable\|install …` | manage components |
-| `dunebox cron list` | list scheduled Cron Jobs |
-| `dunebox env` | environment status (root, default PHP, tools) |
-| `php` · `artisan` · `composer` | use the current project's PHP version automatically |
+The full guide lives at **[dunebox.enesi.it/docs.html](https://dunebox.enesi.it/docs.html)** — installation, hosts, multiple PHP versions, databases & credentials, email, HTTPS, Cron Jobs, the CLI, Claude integration and uninstall, all with copy-ready ports, credentials and commands.
 
 ## ✅ Compatibility
 
