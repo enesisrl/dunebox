@@ -30,12 +30,12 @@ Download a zip, extract it wherever you want, open `dunebox.exe`. On first launc
 
 ## ✨ What you get
 
-- **Every PHP version at once** — 5.6 · 7.4 · 8.2 · 8.3 · 8.5, side by side, no switching
-- **Many databases, even the same engine in several versions** — MySQL 9.6 + 8.0 + 5.7 + MariaDB together, each on its own port; PostgreSQL, MongoDB, Redis optional
+- **Every PHP version at once** — legacy to latest, side by side, no switching
+- **Many databases, even several versions of the same engine** — MySQL, MariaDB, PostgreSQL, MongoDB and Redis, each on its own port
 - **A local domain + green HTTPS for every project** — `mysite.test` in seconds, trusted certificate, Apache or nginx per site
-- **A smart terminal** — `php`/`artisan`/`composer` automatically use the project's PHP version
-- **Built-in web tools** — phpMyAdmin (manages all MySQL/MariaDB instances), phpRedisAdmin, Mailpit
-- **Cron Jobs**, **optional local DNS**, **dev tools** (Git/Node/nvm/Python/FFmpeg via their official channels), bundled **Composer**
+- **A smart terminal** — `php`/`artisan`/`composer`/`mysql` automatically use the current project's PHP version and database
+- **Built-in web tools** — phpMyAdmin, phpRedisAdmin, Mailpit
+- **Cron Jobs**, **optional local DNS**, **dev tools** and bundled **Composer**
 - **Claude integration** — drive Dunebox from Claude Code / Claude Desktop
 - **Truly portable** — one folder; move it, copy it, carry it on a USB stick
 
@@ -51,10 +51,7 @@ Requirements: Windows 10/11 (64-bit), an internet connection on first launch (to
 
 ## 🔄 Updating
 
-A new version only replaces the two executables — your **`config\` folder and your databases are left untouched**, so your existing environment keeps working unchanged. Two steps:
-
-1. **Quit Dunebox** from the tray icon (so all services stop), then **make an emergency backup of the two current executables**: copy `dunebox.exe` (in the root) and `system\dunebox-cli.exe` to, e.g., `dunebox.exe.bak` and `system\dunebox-cli.exe.bak`. If anything goes wrong, restore those two files to roll back.
-2. Download **`dunebox.exe`** and **`dunebox-cli.exe`** from the [latest release](../../releases/latest) and **overwrite the two files in place** — `dunebox.exe` in the root, `dunebox-cli.exe` inside the `system\` folder. **Do not overwrite the `config\` folder**: keeping your current configuration is what preserves compatibility with your existing environment. Reopen `dunebox.exe`.
+Quit Dunebox from the tray, then overwrite the two executables from the [latest release](../../releases/latest) — `dunebox.exe` in the root and `dunebox-cli.exe` in `system\`. Leave the **`config\` folder and your databases untouched**: your existing environment keeps working unchanged. Full steps in the [documentation](https://dunebox.enesi.it/docs.html).
 
 ## 📖 Documentation
 
@@ -65,10 +62,12 @@ The full guide lives at **[dunebox.enesi.it/docs.html](https://dunebox.enesi.it/
 | | |
 |---|---|
 | **OS** | Windows 10 / 11 (64-bit) |
-| **PHP** | 5.6 · 7.4 · 8.2 · 8.3 · 8.5 (all active at once) |
-| **Databases** | MySQL 9.6/8.0/5.7 · MariaDB · PostgreSQL · MongoDB · Redis (multiple at once) |
-| **Frameworks** | Laravel (all versions, legacy included) and any PHP project |
+| **PHP** | Multiple versions at once, from legacy to the latest |
+| **Databases** | MySQL, MariaDB, PostgreSQL, MongoDB, Redis — several at once |
+| **Frameworks** | Laravel (any version, legacy included) and any PHP project |
 | **Permissions** | one UAC confirmation for hosts + certificate; no service installed |
+
+The exact versions shipped in each release are listed in the [documentation](https://dunebox.enesi.it/docs.html).
 
 ---
 
