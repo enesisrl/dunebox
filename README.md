@@ -10,7 +10,7 @@
 
 <p align="center"><strong>The complete PHP development environment for Windows.</strong></p>
 
-Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch a short wizard lets you choose what to install, then Dunebox downloads and configures everything by itself: web server, PHP (up to five versions at once), databases, mail, tools. No installer, no Windows service — when you remove it, just delete the folder.
+Download a zip, extract it wherever you want, open `dunebox.exe`. On first launch a short wizard lets you choose what to install, then Dunebox downloads and configures everything by itself: web server, PHP (up to six versions at once), databases, mail, tools. No installer, no Windows service — when you remove it, just delete the folder.
 
 <p align="center">
   <picture>
