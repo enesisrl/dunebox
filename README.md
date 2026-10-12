@@ -37,6 +37,7 @@ Download a zip, extract it wherever you want, open `dunebox.exe`. On first launc
 - **Built-in web tools** — phpMyAdmin, phpRedisAdmin, Mailpit
 - **Cron Jobs**, **optional local DNS**, **dev tools** and bundled **Composer**
 - **Claude integration** — drive Dunebox from Claude Code / Claude Desktop
+- **Private by default** — every service listens on `127.0.0.1` only, and commands from a project's config need your explicit approval
 - **Truly portable** — one folder; move it, copy it, carry it on a USB stick
 
 ---
