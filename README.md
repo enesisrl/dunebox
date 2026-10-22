@@ -34,7 +34,7 @@ Download a zip, extract it wherever you want, open `dunebox.exe`. On first launc
 2. Extract it wherever you like (we recommend `C:\dunebox`).
 3. Open **`dunebox.exe`** and follow the short setup wizard.
 
-Requirements: Windows 10/11 (64-bit). Updates install themselves from the app.
+Requirements: Windows 10/11 (64-bit) and an internet connection on first launch. Dunebox updates itself from the app.
 
 Features, supported versions, guides and the CLI reference are all in the **[documentation](https://dunebox.enesi.it/docs.html)**.
 
