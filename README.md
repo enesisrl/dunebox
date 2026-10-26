@@ -14,7 +14,7 @@ Download a zip, extract it wherever you want, open `dunebox.exe`. On first launc
 
 <p align="center">
   <picture>
-    <img src="dunebox-screenshot-2026-10-26.png" alt="Dunebox">
+    <img src="dunebox-screenshot.png" alt="Dunebox">
   </picture>
 </p>
 
